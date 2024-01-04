@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '2.7.17'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id 'org.sonarqube' version '3.3' // 소나큐브 플러그인 추가
 }
 
 group = 'com.wishme'
@@ -49,4 +50,12 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+sonarqube {
+	properties {
+		property 'sonar.projectKey', 'squ_3d152a82a9706cdb524680c4c5887806a41d97f9'
+		property 'sonar.host.url', 'http://t1017.p.ssafy.io:9000/'
+		// 다른 소나큐브 속성들도 필요에 따라 설정 가능
+	}
 }
