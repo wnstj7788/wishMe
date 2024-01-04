@@ -20,6 +20,15 @@ pipeline {
                 }
             }
         }
+         stage('SonarQube analysis') {
+              steps {
+                  withSonarQubeEnv('SonarQube Server') {
+                       dir('server/myLetter') {
+                           sh './gradlew sonarqube'
+                         }
+                      }
+              }
+          }
 
         stage('Application') {
             steps {
