@@ -23,7 +23,7 @@ pipeline {
               steps {
                   withSonarQubeEnv('SonarQube Server') {
                        dir('server/myLetter') {
-                           sh 'sudo ./gradlew sonarqube'
+                           sh './gradlew sonarqube'
                          }
                       }
               }
