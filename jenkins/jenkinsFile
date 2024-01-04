@@ -6,9 +6,9 @@ pipeline {
             steps {
                 script {
                     // Git Clone 스텝
-                    git branch: 'develop',
-                    url: 'https://lab.ssafy.com/s09-final/S09P31B105.git',
-                    credentialsId: 'daeun_token' // GitLab Credential ID
+                    git branch: 'master',
+                    url: 'https://github.com/wnstj7788/wishMe.git',
+                    credentialsId: 'github' // GitLab Credential ID
                 }
             }
             post {
