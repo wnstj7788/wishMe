@@ -23,6 +23,7 @@ pipeline {
               steps {
                   withSonarQubeEnv('SonarQube Server') {
                        dir('server/myLetter') {
+                           sh 'chmod +x ./gradlew' // 실행 권한 추가
                            sh 'sudo ./gradlew sonarqube'
                          }
                       }
