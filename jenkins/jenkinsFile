@@ -3,12 +3,12 @@ pipeline {
     stages {
         stage('Git Clone') {
             steps {
-                script {
-                    // Git Clone 스텝
-                    git branch: 'master',
-                    url: 'https://github.com/wnstj7788/wishMe.git',
-                    credentialsId: 'github' // GitLab Credential ID
-                }
+//                 script {
+//                     // Git Clone 스텝
+//                     git branch: 'master',
+//                     url: 'https://github.com/wnstj7788/wishMe.git',
+//                     credentialsId: 'github' // GitLab Credential ID
+//                 }
             }
             post {
                 success {
