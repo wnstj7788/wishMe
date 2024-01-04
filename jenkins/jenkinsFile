@@ -1,25 +1,25 @@
 pipeline {
     agent any
     
-    stages {
-        stage('Git Clone') {
-            steps {
-                script {
-                    // Git Clone 스텝
-                    git branch: 'master',
-                    url: 'https://github.com/wnstj7788/wishMe.git',
-                    credentialsId: 'github' // GitLab Credential ID
-                }
-            }
-            post {
-                success {
-                    echo "Successfully Cloned Repository"
-                }
-                failure {
-                    echo "Failed to Clone Repository"
-                }
-            }
-        }
+//     stages {
+//         stage('Git Clone') {
+//             steps {
+//                 script {
+//                     // Git Clone 스텝
+//                     git branch: 'master',
+//                     url: 'https://github.com/wnstj7788/wishMe.git',
+//                     credentialsId: 'github' // GitLab Credential ID
+//                 }
+//             }
+//             post {
+//                 success {
+//                     echo "Successfully Cloned Repository"
+//                 }
+//                 failure {
+//                     echo "Failed to Clone Repository"
+//                 }
+//             }
+//         }
          stage('SonarQube analysis') {
               steps {
                   withSonarQubeEnv('SonarQube Server') {
