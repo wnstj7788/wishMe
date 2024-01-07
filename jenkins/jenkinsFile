@@ -51,7 +51,7 @@ pipeline {
             steps {
                 script {
                     sh """
-                    cd /var/jenkins_home/workspace/dockerRun && sudo docker-compose up --build -d
+                    cd /var/jenkins_home/workspace/dockerRun && docker-compose up --build -d
                     """
                 }
             }
