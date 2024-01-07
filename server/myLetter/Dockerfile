@@ -1,7 +1,7 @@
 FROM adoptopenjdk/openjdk11
 
-COPY ./backend-0.0.1-SNAPSHOT.jar backend-0.0.1-SNAPSHOT.jar
+COPY /build/libs/myLetter-0.0.1-SNAPSHOT.jar myLetter-0.0.1-SNAPSHOT.jar
 
 EXPOSE 9997
 
-ENTRYPOINT [ "java" ,"-jar", "backend-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT [ "java" ,"-jar", "myLetter-0.0.1-SNAPSHOT.jar"]
