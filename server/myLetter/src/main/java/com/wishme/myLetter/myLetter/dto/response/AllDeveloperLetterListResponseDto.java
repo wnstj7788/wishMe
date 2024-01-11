@@ -19,6 +19,6 @@ public class AllDeveloperLetterListResponseDto {
     // 총 페이지 수
     private int totalPages;
     // 페이지 당 편지
-    private List<AllDeveloperLetterResponseDto> lettersPerPage = new ArrayList<>();
+    private final List<AllDeveloperLetterResponseDto> lettersPerPage = new ArrayList<>();
 
 }
