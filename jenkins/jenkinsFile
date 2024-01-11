@@ -25,7 +25,10 @@ pipeline {
                           withSonarQubeEnv('SonarQube Server') {
                                dir('server/myLetter') {
                                    sh 'chmod +x ./gradlew' // 실행 권한 추가
-                                   sh './gradlew sonarqube'
+                                   sh './gradlew sonarqube \
+                                         -Dsonar.projectKey=1q2w3e \
+                                         -Dsonar.host.url=https://sonarqube.ssafy.com \
+                                         -Dsonar.login=1q2w3e'
                                  }
                               }
                       }
