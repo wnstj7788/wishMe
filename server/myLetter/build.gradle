@@ -52,10 +52,10 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
-sonarqube {
-	properties {
-		property 'sonar.projectKey', 'c91bfcecc41315ab69a52009115d019e449255c8'
-		property 'sonar.host.url', 'https://sonarqube.ssafy.com/'
-		// 다른 소나큐브 속성들도 필요에 따라 설정 가능
-	}
-}
+//sonarqube {
+//	properties {
+//		property 'sonar.projectKey', 'c91bfcecc41315ab69a52009115d019e449255c8'
+//		property 'sonar.host.url', 'https://sonarqube.ssafy.com/'
+//		// 다른 소나큐브 속성들도 필요에 따라 설정 가능
+//	}
+//}
