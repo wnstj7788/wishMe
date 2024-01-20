@@ -52,6 +52,7 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
+// test code 진행
 //sonarqube {
 //	properties {
 //		property 'sonar.projectKey', 'c91bfcecc41315ab69a52009115d019e449255c8'
