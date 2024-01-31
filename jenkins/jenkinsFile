@@ -7,7 +7,7 @@ pipeline {
                     // Git Clone 스텝
                     git branch: 'master',
                     url: 'https://github.com/wnstj7788/wishMe.git',
-                    credentialsId: 'JenkinsToGiitPass' // GitLab Credential ID
+                    credentialsId: 'github_wishme_access_clone' // GitLab Credential ID
                 }
             }
             post {
@@ -22,13 +22,10 @@ pipeline {
 
         stage('SonarQube analysis') {
                       steps {
-                          withSonarQubeEnv('SonarQube Server') {
+                          withSonarQubeEnv('oci_sonar') {
                                dir('server/myLetter') {
                                    sh 'chmod +x ./gradlew' // 실행 권한 추가
-                                   sh './gradlew sonarqube \
-                                          -Dsonar.projectKey=1q2w3e \
-                                          -Dsonar.host.url=https://sonarqube.ssafy.com \
-                                          -Dsonar.login=eff6e3aaa799f83eb377df0c282c5e58be28565f'
+                                   sh './gradlew sonarqube
                                  }
                               }
                       }
@@ -38,7 +35,7 @@ pipeline {
             steps {
                 // application.yml 파일 복사
 //                 sh 'cp /var/jenkins_home/workspace/applicationFile/user/application.yml /var/jenkins_home/workspace/wishMe/server/user/src/main/resources/'
-                sh 'cp /var/jenkins_home/workspace/applicationFile/myletter/application.yml /var/jenkins_home/workspace/wishMe/server/myLetter/src/main/resources/'
+                sh 'cp /var/jenkins_home/workspace/applicationFile/application.Myletter.yml /var/jenkins_home/workspace/wishMe/server/myLetter/src/main/resources/'
 //                 sh 'cp /var/jenkins_home/workspace/applicationFile/schoolLetter/application.yml /var/jenkins_home/workspace/wishMe/server/schoolLetter/src/main/resources/'
             }
         }
