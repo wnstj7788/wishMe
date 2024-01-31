@@ -24,8 +24,9 @@ pipeline {
                       steps {
                           withSonarQubeEnv('oci_sonar') {
                                dir('server/myLetter') {
-                                   sh 'chmod +x ./gradlew' // 실행 권한 추가
-                                   sh './gradlew sonarqube'
+                                      sh 'chmod +x gradlew'
+                                      sh './gradlew wrapper --gradle-version=8.5'
+                                      sh './gradlew clean build sonarqube --warning-mode all'
                                  }
                               }
                       }
