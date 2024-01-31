@@ -4,10 +4,9 @@ pipeline {
         stage('Git Clone') {
             steps {
                 script {
-                    // Git Clone 스텝
                     git branch: 'master',
                     url: 'https://github.com/wnstj7788/wishMe.git',
-                    credentialsId: 'github_wishme_access_clone' // GitLab Credential ID
+                    credentialsId: 'github_wishme_access_clone'
                 }
             }
             post {
@@ -21,63 +20,43 @@ pipeline {
         }
 
         stage('SonarQube analysis') {
-                      steps {
-                          withSonarQubeEnv('oci_sonar') {
-                               dir('server/myLetter') {
-                                      sh 'chmod +x gradlew'
-                                      sh './gradlew wrapper --gradle-version=8.5'
-                                      sh './gradlew clean build sonarqube --warning-mode all'
-                                 }
-                              }
-                      }
-                      steps {
-                          withSonarQubeEnv('oci_sonar') {
-                               dir('server/schoolLetter') {
-                                      sh 'chmod +x gradlew'
-                                      sh './gradlew wrapper --gradle-version=8.5'
-                                      sh './gradlew clean build sonarqube --warning-mode all'
-                                 }
-                              }
-                      }
-                      steps {
-                          withSonarQubeEnv('oci_sonar') {
-                               dir('server/user') {
-                                      sh 'chmod +x gradlew'
-                                      sh './gradlew wrapper --gradle-version=8.5'
-                                      sh './gradlew clean build sonarqube --warning-mode all'
-                                 }
-                              }
-                      }
-                  }
+            steps {
+                withSonarQubeEnv('oci_sonar') {
+                    analyzeSonarQube('myLetter')
+                    analyzeSonarQube('schoolLetter')
+                    analyzeSonarQube('user')
+                }
+            }
+        }
 
         stage('Application') {
             steps {
-                // application.yml 파일 복사
-//                 sh 'cp /var/jenkins_home/workspace/applicationFile/user/application.yml /var/jenkins_home/workspace/wishMe/server/user/src/main/resources/'
                 sh 'cp /var/jenkins_home/workspace/applicationFile/application.Myletter.yml /var/jenkins_home/workspace/wishMe/server/myLetter/src/main/resources/'
-//                 sh 'cp /var/jenkins_home/workspace/applicationFile/schoolLetter/application.yml /var/jenkins_home/workspace/wishMe/server/schoolLetter/src/main/resources/'
+                // Uncomment and adjust the following lines if needed
+                // sh 'cp /var/jenkins_home/workspace/applicationFile/user/application.yml /var/jenkins_home/workspace/wishMe/server/user/src/main/resources/'
+                // sh 'cp /var/jenkins_home/workspace/applicationFile/schoolLetter/application.yml /var/jenkins_home/workspace/wishMe/server/schoolLetter/src/main/resources/'
             }
         }
 
         stage('Build') {
             steps {
-                // Gradle 빌드
-//                 dir('/var/jenkins_home/workspace/wishMe/server/user/') {
-//                     sh 'chmod +x gradlew'
-//                     sh './gradlew clean build'
-//                 }
                 dir('/var/jenkins_home/workspace/wishMe/server/myLetter/') {
                     sh 'chmod +x gradlew'
                     sh './gradlew clean build'
                 }
-//                 dir('/var/jenkins_home/workspace/wishMe/server/schoolLetter/') {
-//                     sh 'chmod +x gradlew'
-//                     sh './gradlew clean build'
-//                 }
+                // Uncomment and adjust the following lines if needed
+                // dir('/var/jenkins_home/workspace/wishMe/server/user/') {
+                //     sh 'chmod +x gradlew'
+                //     sh './gradlew clean build'
+                // }
+                // dir('/var/jenkins_home/workspace/wishMe/server/schoolLetter/') {
+                //     sh 'chmod +x gradlew'
+                //     sh './gradlew clean build'
+                // }
             }
         }
 
-        stage('ssh-docker') {
+        stage('SSH-Docker') {
             steps {
                 script {
                     sh """
@@ -90,10 +69,18 @@ pipeline {
 
     post {
         success {
-            echo "SSH and Docker commands succeeded"
+            echo "Pipeline succeeded"
         }
         failure {
-            echo "SSH and Docker commands failed"
+            echo "Pipeline failed"
         }
+    }
+}
+
+def analyzeSonarQube(project) {
+    dir("server/${project}") {
+        sh 'chmod +x gradlew'
+        sh './gradlew wrapper --gradle-version=8.5'
+        sh './gradlew clean build sonarqube --warning-mode all'
     }
 }
