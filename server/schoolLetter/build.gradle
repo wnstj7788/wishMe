@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '2.7.17'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id "org.sonarqube" version "4.4.1.3373" // 소나큐브 플러그인 추가
 }
 
 group = 'com.wishme'

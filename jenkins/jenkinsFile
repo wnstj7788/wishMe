@@ -30,6 +30,24 @@ pipeline {
                                  }
                               }
                       }
+                      steps {
+                          withSonarQubeEnv('oci_sonar') {
+                               dir('server/schoolLetter') {
+                                      sh 'chmod +x gradlew'
+                                      sh './gradlew wrapper --gradle-version=8.5'
+                                      sh './gradlew clean build sonarqube --warning-mode all'
+                                 }
+                              }
+                      }
+                      steps {
+                          withSonarQubeEnv('oci_sonar') {
+                               dir('server/user') {
+                                      sh 'chmod +x gradlew'
+                                      sh './gradlew wrapper --gradle-version=8.5'
+                                      sh './gradlew clean build sonarqube --warning-mode all'
+                                 }
+                              }
+                      }
                   }
 
         stage('Application') {
