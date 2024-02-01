@@ -31,7 +31,7 @@ pipeline {
 
         stage('Application') {
             steps {
-                sh 'cp /var/jenkins_home/workspace/applicationFile/application.Myletter.yml /var/jenkins_home/workspace/wishMe/server/myLetter/src/main/resources/'
+                sh 'cp /var/jenkins_home/workspace/applicationFile/appliction.Myletter.yml /var/jenkins_home/workspace/wishMe/server/myLetter/src/main/resources/'
                 // Uncomment and adjust the following lines if needed
                 // sh 'cp /var/jenkins_home/workspace/applicationFile/user/application.yml /var/jenkins_home/workspace/wishMe/server/user/src/main/resources/'
                 // sh 'cp /var/jenkins_home/workspace/applicationFile/schoolLetter/application.yml /var/jenkins_home/workspace/wishMe/server/schoolLetter/src/main/resources/'
