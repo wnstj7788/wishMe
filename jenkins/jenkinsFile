@@ -40,7 +40,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                dir('/var/jenkins_home/workspace/wishMe/server/myLetter/') {
+                dir('/var/jenkins_home/workspace/wishme/server/myLetter') {
                     sh 'chmod +x gradlew'
                     sh './gradlew clean build'
                 }
