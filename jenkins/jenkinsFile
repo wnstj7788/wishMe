@@ -32,7 +32,8 @@ pipeline {
         stage('Application') {
             steps {
                 sh 'cp /var/jenkins_home/workspace/applicationFile/appliction.Myletter.yml /var/jenkins_home/workspace/wishme/server/myLetter/src/main/resources/'
-                // Uncomment and adjust the following lines if needed
+                sh 'cp /var/jenkins_home/workspace/applicationFile/appliction.School.yml /var/jenkins_home/workspace/wishme/server/user/src/main/resources/'
+                sh 'cp /var/jenkins_home/workspace/applicationFile/appliction.User.yml /var/jenkins_home/workspace/wishme/server/schoolLetter/src/main/resources/'
                 // sh 'cp /var/jenkins_home/workspace/applicationFile/user/application.yml /var/jenkins_home/workspace/wishMe/server/user/src/main/resources/'
                 // sh 'cp /var/jenkins_home/workspace/applicationFile/schoolLetter/application.yml /var/jenkins_home/workspace/wishMe/server/schoolLetter/src/main/resources/'
             }
@@ -44,15 +45,15 @@ pipeline {
                     sh 'chmod +x gradlew'
                     sh './gradlew clean build'
                 }
-                // Uncomment and adjust the following lines if needed
-                // dir('/var/jenkins_home/workspace/wishMe/server/user/') {
-                //     sh 'chmod +x gradlew'
-                //     sh './gradlew clean build'
-                // }
-                // dir('/var/jenkins_home/workspace/wishMe/server/schoolLetter/') {
-                //     sh 'chmod +x gradlew'
-                //     sh './gradlew clean build'
-                // }
+//                 Uncomment and adjust the following lines if needed
+                dir('/var/jenkins_home/workspace/wishme/server/user/') {
+                    sh 'chmod +x gradlew'
+                    sh './gradlew clean build'
+                }
+                dir('/var/jenkins_home/workspace/wishme/server/schoolLetter/') {
+                    sh 'chmod +x gradlew'
+                    sh './gradlew clean build'
+                }
             }
         }
 
@@ -60,6 +61,7 @@ pipeline {
             steps {
                 script {
                     sh """
+                    pwd &&
                     cd /var/jenkins_home/workspace/dockerRun && docker-compose up --build -d
                     """
                 }
