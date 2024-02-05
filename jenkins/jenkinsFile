@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        SONAR_SCANNER_HOME = tool 'sonarqube-scanner'
+    }
     stages {
         stage('Git Clone') {
             steps {
@@ -22,20 +25,30 @@ pipeline {
         stage('SonarQube analysis') {
             steps {
                 withSonarQubeEnv('oci_sonar') {
-                    analyzeSonarQube('myLetter')
-                    analyzeSonarQube('schoolLetter')
-                    analyzeSonarQube('user')
+                    script {
+                        // React 프로젝트 분석
+                        dir('/var/jenkins_home/workspace/wishme/client/') {
+                            sh 'npm install'
+                            sh 'npm install -g sonarqube-scanner'
+                            sh 'sonar-scanner'
+                        }
+
+                        // Spring 프로젝트 분석
+                        analyzeSonarQube('myLetter')
+                        analyzeSonarQube('schoolLetter')
+                        analyzeSonarQube('user')
+                    }
                 }
             }
         }
 
         stage('Application') {
             steps {
-                sh 'cp /var/jenkins_home/workspace/applicationFile/application.Myletter.yml /var/jenkins_home/workspace/wishme/server/myLetter/src/main/resources/'
-                sh 'cp /var/jenkins_home/workspace/applicationFile/application.School.yml /var/jenkins_home/workspace/wishme/server/user/src/main/resources/'
-                sh 'cp /var/jenkins_home/workspace/applicationFile/application.User.yml /var/jenkins_home/workspace/wishme/server/schoolLetter/src/main/resources/'
-                // sh 'cp /var/jenkins_home/workspace/applicationFile/user/application.yml /var/jenkins_home/workspace/wishMe/server/user/src/main/resources/'
-                // sh 'cp /var/jenkins_home/workspace/applicationFile/schoolLetter/application.yml /var/jenkins_home/workspace/wishMe/server/schoolLetter/src/main/resources/'
+                script {
+                    sh 'cp /var/jenkins_home/workspace/applicationFile/application.Myletter.yml /var/jenkins_home/workspace/wishme/server/myLetter/src/main/resources/'
+                    sh 'cp /var/jenkins_home/workspace/applicationFile/application.School.yml /var/jenkins_home/workspace/wishme/server/user/src/main/resources/'
+                    sh 'cp /var/jenkins_home/workspace/applicationFile/application.User.yml /var/jenkins_home/workspace/wishme/server/schoolLetter/src/main/resources/'
+                }
             }
         }
 
@@ -45,7 +58,6 @@ pipeline {
                     sh 'chmod +x gradlew'
                     sh './gradlew clean build'
                 }
-//                 Uncomment and adjust the following lines if needed
                 dir('/var/jenkins_home/workspace/wishme/server/user/') {
                     sh 'chmod +x gradlew'
                     sh './gradlew clean build'
@@ -81,7 +93,6 @@ pipeline {
 
 def analyzeSonarQube(project) {
     dir("server/${project}") {
-        sh 'chmod +x gradlew'
         sh './gradlew wrapper --gradle-version=8.5'
         sh './gradlew clean build sonarqube --warning-mode all'
     }
