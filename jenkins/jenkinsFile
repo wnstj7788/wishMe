@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    environment {
-        SONAR_SCANNER_HOME = tool 'sonarqube-scanner'
-    }
     stages {
         stage('Git Clone') {
             steps {
