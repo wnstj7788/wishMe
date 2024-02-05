@@ -31,9 +31,9 @@ pipeline {
 
         stage('Application') {
             steps {
-                sh 'cp /var/jenkins_home/workspace/applicationFile/appliction.Myletter.yml /var/jenkins_home/workspace/wishme/server/myLetter/src/main/resources/'
-                sh 'cp /var/jenkins_home/workspace/applicationFile/appliction.School.yml /var/jenkins_home/workspace/wishme/server/user/src/main/resources/'
-                sh 'cp /var/jenkins_home/workspace/applicationFile/appliction.User.yml /var/jenkins_home/workspace/wishme/server/schoolLetter/src/main/resources/'
+                sh 'cp /var/jenkins_home/workspace/applicationFile/application.Myletter.yml /var/jenkins_home/workspace/wishme/server/myLetter/src/main/resources/'
+                sh 'cp /var/jenkins_home/workspace/applicationFile/application.School.yml /var/jenkins_home/workspace/wishme/server/user/src/main/resources/'
+                sh 'cp /var/jenkins_home/workspace/applicationFile/application.User.yml /var/jenkins_home/workspace/wishme/server/schoolLetter/src/main/resources/'
                 // sh 'cp /var/jenkins_home/workspace/applicationFile/user/application.yml /var/jenkins_home/workspace/wishMe/server/user/src/main/resources/'
                 // sh 'cp /var/jenkins_home/workspace/applicationFile/schoolLetter/application.yml /var/jenkins_home/workspace/wishMe/server/schoolLetter/src/main/resources/'
             }
