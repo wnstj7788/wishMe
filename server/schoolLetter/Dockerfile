@@ -1,7 +1,10 @@
 FROM adoptopenjdk/openjdk11
 
-#COPY ./backend-0.0.1-SNAPSHOT.jar backend-0.0.1-SNAPSHOT.jar
+COPY /build/libs/schoolLetter-0.0.1-SNAPSHOT.jar /schoolLetter-0.0.1-SNAPSHOT.jar
 
 EXPOSE 9999
 
-ENTRYPOINT [ "java" ,"-jar", "/build/libs/schoolLetter-0.0.1-SNAPSHOT.jar"]
+# 실행 권한 추가
+RUN chmod +x /schoolLetter-0.0.1-SNAPSHOT.jar
+
+ENTRYPOINT ["java", "-jar", "/schoolLetter-0.0.1-SNAPSHOT.jar"]
