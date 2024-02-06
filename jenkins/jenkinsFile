@@ -71,7 +71,7 @@ pipeline {
                 script {
                     sh """
                     pwd &&
-                    cd /var/jenkins_home/workspace/DockerSettingFile && docker-compose up --build -d
+                    cd /var/jenkins_home/workspace/DockerSettingFile && docker-compose -f docker-compose.serverUp.yml up --build -d
                     """
                 }
             }
