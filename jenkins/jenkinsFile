@@ -19,32 +19,32 @@ pipeline {
             }
         }
 
-        stage('SonarQube analysis') {
-            steps {
-                withSonarQubeEnv('oci_sonar') {
-                    script {
-                        // React 프로젝트 분석
-                        dir('/var/jenkins_home/workspace/wishme/client/') {
-                            sh 'npm install'
-                            sh 'npm install -g sonarqube-scanner'
-                            sh 'sonar-scanner'
-                        }
-
-                        // Spring 프로젝트 분석
-                        analyzeSonarQube('myLetter')
-                        analyzeSonarQube('schoolLetter')
-                        analyzeSonarQube('user')
-                    }
-                }
-            }
-        }
+//         stage('SonarQube analysis') {
+//             steps {
+//                 withSonarQubeEnv('oci_sonar') {
+//                     script {
+//                         // React 프로젝트 분석
+//                         dir('/var/jenkins_home/workspace/wishme/client/') {
+//                             sh 'npm install'
+//                             sh 'npm install -g sonarqube-scanner'
+//                             sh 'sonar-scanner'
+//                         }
+//
+//                         // Spring 프로젝트 분석
+//                         analyzeSonarQube('myLetter')
+//                         analyzeSonarQube('schoolLetter')
+//                         analyzeSonarQube('user')
+//                     }
+//                 }
+//             }
+//         }
 
         stage('Application') {
             steps {
                 script {
-                    sh 'cp /var/jenkins_home/workspace/applicationFile/application.Myletter.yml /var/jenkins_home/workspace/wishme/server/myLetter/src/main/resources/'
-                    sh 'cp /var/jenkins_home/workspace/applicationFile/application.School.yml /var/jenkins_home/workspace/wishme/server/user/src/main/resources/'
-                    sh 'cp /var/jenkins_home/workspace/applicationFile/application.User.yml /var/jenkins_home/workspace/wishme/server/schoolLetter/src/main/resources/'
+                    sh 'cp /var/jenkins_home/workspace/appFile/application.myLetter.yml /var/jenkins_home/workspace/wishme/server/myLetter/src/main/resources/'
+                    sh 'cp /var/jenkins_home/workspace/appFile/application.schoolLetter.yml /var/jenkins_home/workspace/wishme/server/user/src/main/resources/'
+                    sh 'cp /var/jenkins_home/workspace/appFile/application.user.yml /var/jenkins_home/workspace/wishme/server/schoolLetter/src/main/resources/'
                 }
             }
         }
@@ -66,16 +66,16 @@ pipeline {
             }
         }
 
-        stage('SSH-Docker') {
-            steps {
-                script {
-                    sh """
-                    pwd &&
-                    cd /var/jenkins_home/workspace/DockerSettingFile && docker compose -f docker-compose.serverUp.yml up --build -d
-                    """
-                }
-            }
-        }
+//         stage('SSH-Docker') {
+//             steps {
+//                 script {
+//                     sh """
+//                     pwd &&
+//                     cd /var/jenkins_home/workspace/DockerSettingFile && docker compose -f docker-compose.serverUp.yml up --build -d
+//                     """
+//                 }
+//             }
+//         }
     }
 
     post {
@@ -88,10 +88,10 @@ pipeline {
     }
 }
 
-def analyzeSonarQube(project) {
-    dir("server/${project}") {
-        sh 'chmod +x gradlew'
-        sh './gradlew wrapper --gradle-version=8.5'
-        sh './gradlew clean build sonarqube --warning-mode all'
-    }
-}
+// def analyzeSonarQube(project) {
+//     dir("server/${project}") {
+//         sh 'chmod +x gradlew'
+//         sh './gradlew wrapper --gradle-version=8.5'
+//         sh './gradlew clean build sonarqube --warning-mode all'
+//     }
+// }
