@@ -71,7 +71,7 @@ pipeline {
                 script {
                     sh """
                     pwd &&
-                    cd /var/jenkins_home/workspace/docker && docker compose -f docker-compose.wishme.yml up --build -d
+                    cd /var/jenkins_home/workspace/docker && docker-compose -f docker-compose.wishme.yml up --build -d
                     """
                 }
             }
