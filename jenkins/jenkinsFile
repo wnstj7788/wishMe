@@ -66,16 +66,16 @@ pipeline {
             }
         }
 
-//         stage('SSH-Docker') {
-//             steps {
-//                 script {
-//                     sh """
-//                     pwd &&
-//                     cd /var/jenkins_home/workspace/DockerSettingFile && docker compose -f docker-compose.serverUp.yml up --build -d
-//                     """
-//                 }
-//             }
-//         }
+        stage('SSH-Docker') {
+            steps {
+                script {
+                    sh """
+                    pwd &&
+                    cd /var/jenkins_home/workspace/docker && docker compose -f docker-compose.wishme.yml up --build -d
+                    """
+                }
+            }
+        }
     }
 
     post {
