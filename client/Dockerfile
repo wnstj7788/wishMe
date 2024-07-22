@@ -30,7 +30,7 @@ RUN npm run build
 FROM nginx:alpine
 RUN rm /etc/nginx/conf.d/default.conf
 RUN pwd
-COPY /var/jenkins_home/workspace/docker/fe/default.conf /etc/nginx/conf.d
+COPY ./default.conf /etc/nginx/conf.d
 COPY --from=builder /app/build /usr/share/nginx/html
 
 CMD ["nginx", "-g", "daemon off;"]
