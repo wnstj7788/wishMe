@@ -24,15 +24,15 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
-    implementation 'org.springframework.boot:spring-boot-starter-security'
+    // implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    // implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'mysql:mysql-connector-java:8.0.32'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.springframework.security:spring-security-test'
+    // testImplementation 'org.springframework.security:spring-security-test'
 
 	// dto validation
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
@@ -40,10 +40,10 @@ dependencies {
 	implementation 'io.jsonwebtoken:jjwt:0.9.1'
 
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
-	implementation 'io.micrometer:micrometer-registry-prometheus'
+	// implementation 'io.micrometer:micrometer-registry-prometheus'
 
 	// OpenAPI
-	implementation 'com.theokanning.openai-gpt3-java:service:0.12.0'
+	// implementation 'com.theokanning.openai-gpt3-java:service:0.12.0'
 	// String to Json
 	implementation group: 'org.json', name: 'json', version: '20220924'
 }
